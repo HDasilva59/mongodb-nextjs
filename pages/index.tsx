@@ -3,12 +3,16 @@ import { getDatabase } from "../src/database";
 
 export const getServerSideProps = async () => {
   const mongodb = await getDatabase();
-
-  const games = await mongodb.db().collection("games").find().toArray();
+  console.log(getDatabase());
+  const data = await mongodb
+  .db()
+  .collection("test")
+  .find({games: { name: "Guitar Hero"}})
+  .toArray();
 
   return {
     props: {
-      games: games,
+      games: data,
     },
   };
 };
